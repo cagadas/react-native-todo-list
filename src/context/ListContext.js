@@ -6,12 +6,24 @@ const ListContext = React.createContext();
 export const ListProvider = ({ children }) => {
 
     const [itemList, setItemList] = useState([])
+
     const getItemList = async () => {
         const res = await axios.get("/simpsons");
         setItemList(res.data)
     }
 
-    return <ListContext.Provider value={{ data: itemList, getItemList }}>
+    const addItem = (item) => {
+        const maxID = itemList.reduce((a, b) => {
+            return (a.id > b.id) ? a.id : b.id
+        })
+        setItemList([...itemList, { ...item, id: `${parseInt(maxID) + 1}` }]);
+    }
+
+    const deleteItem = (id) => {
+        console.log(id)
+    }
+
+    return <ListContext.Provider value={{ data: itemList, getItemList, addItem, deleteItem }}>
         {children}
     </ListContext.Provider>
 }
