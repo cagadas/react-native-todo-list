@@ -9,36 +9,34 @@ const ListScreen = ({ navigation }) => {
         getItemList();
     }, [])
     return (
-        <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-                <FlatList data={data} keyExtras={(data) => data.id} renderItem={({ item, index }) => {
-                    return (
-                        <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-                            <View style={[styles.main, styles.row]}>
-                                <View style={styles.row}>
-                                    <Text >{index + 1}</Text>
-                                    <Image
-                                        style={{ height: 40, width: 15, marginHorizontal: 15 }}
-                                        source={{ uri: item.avatar }}
-                                    />
-                                    <Text style={{ marginLeft: 10 }}> {item.name}</Text>
-                                </View>
-                                <View style={styles.row}>
-                                    <TouchableOpacity style={[styles.arrowButtons, styles.upButton]}>
-                                        <AntDesign name="up" size={20} color="green" />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={[styles.arrowButtons, styles.downButton]}>
-                                        <AntDesign name="down" size={20} color="red" />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity>
-                                        <AntDesign name="delete" size={24} color="black" />
-                                    </TouchableOpacity>
-                                </View>
+        <View>
+            <FlatList data={data} keyExtras={(data) => data.id} renderItem={({ item, index }) => {
+                return (
+                    <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })}>
+                        <View style={[styles.main, styles.row]}>
+                            <View style={styles.row}>
+                                <Text >{index + 1}</Text>
+                                <Image
+                                    style={styles.image}
+                                    source={{ uri: item.avatar }}
+                                />
+                                <Text style={{ marginLeft: 10 }}> {item.name}</Text>
                             </View>
-                        </TouchableOpacity>
-                    )
-                }} />
-            </TouchableOpacity>
+                            <View style={styles.row}>
+                                <TouchableOpacity style={[styles.arrowButtons, styles.upButton]}>
+                                    <AntDesign name="up" size={20} color="green" />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={[styles.arrowButtons, styles.downButton]}>
+                                    <AntDesign name="down" size={20} color="red" />
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <AntDesign name="delete" size={24} color="black" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                )
+            }} />
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add')}>
                 <AntDesign name="plus" size={24} color="white" />
             </TouchableOpacity>
@@ -57,6 +55,11 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    image: {
+        height: 40,
+        width: 15,
+        marginHorizontal: 15
     },
     arrowButtons: {
         borderRadius: 50,

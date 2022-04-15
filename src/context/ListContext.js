@@ -9,7 +9,6 @@ export const ListProvider = ({ children }) => {
     const getItemList = async () => {
         const res = await axios.get("/simpsons");
         setItemList(res.data)
-        console.log(res.data)
     }
 
     return <ListContext.Provider value={{ data: itemList, getItemList }}>
