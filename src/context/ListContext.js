@@ -20,7 +20,8 @@ export const ListProvider = ({ children }) => {
     }
 
     const deleteItem = (id) => {
-        console.log(id)
+        const filterList = itemList.filter(t => t.id !== id)
+        setItemList([...filterList])
     }
 
     return <ListContext.Provider value={{ data: itemList, getItemList, addItem, deleteItem }}>
