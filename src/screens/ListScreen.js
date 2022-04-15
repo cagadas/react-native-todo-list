@@ -1,12 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useContext, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+import ListContext from "../context/ListContext"
 
 const ListScreen = ({ navigation }) => {
+    const { data, getItemList } = useContext(ListContext)
+    useEffect(() => {
+        getItemList();
+    }, [])
     return (
         <View style={{ flex: 1 }}>
             <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
-                <Text>List</Text>
+                <FlatList data={data} keyExtras={(data) => data.id} renderItem={({ item, index }) => {
+                    return (
+                        <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+                            <View style={{ flexDirection: 'row', }}>
+                                <Text>{index + 1}</Text>
+                                <Text> {item.name}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                }} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add')}>
                 <AntDesign name="plus" size={24} color="white" />
