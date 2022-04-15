@@ -18,13 +18,13 @@ const AddScreen = () => {
     return (
         <View style={{ marginVertical: 10, paddingHorizontal: 10 }}>
             <Text>Name Surname : </Text>
-            <TextInput style={styles.input} value={name} onChangeText={(text) => setName(text)} />
+            <TextInput style={[styles.input , styles.inputText]} value={name} onChangeText={(text) => setName(text)} />
             <Text>Job Title : </Text>
-            <TextInput style={styles.input} value={job} onChangeText={(text) => setJob(text)}/>
+            <TextInput style={[styles.input , styles.inputText]} value={job} onChangeText={(text) => setJob(text)} />
             <Text>About Him/Her : </Text>
-            <TextInput style={styles.input} value={description} onChangeText={(text) => setDescription(text)}/>
+            <TextInput style={[styles.input , styles.inputArea]} value={description} onChangeText={(text) => setDescription(text)} />
             <Text>Image Link : </Text>
-            <TextInput style={styles.input} value={avatar} onChangeText={(text) => setAvatar(text)}/>
+            <TextInput style={[styles.input , styles.inputText]} value={avatar} onChangeText={(text) => setAvatar(text)} />
             <Button title="Add Character" onPress={() => addItem(formObj)} />
         </View>
     )
@@ -34,11 +34,16 @@ const styles = StyleSheet.create({
     input: {
         marginBottom: 10,
         paddingHorizontal: 5,
-        height: 40,
         borderWidth: 1,
         borderColor: '#868686',
         borderRadius: 5,
         backgroundColor: 'white',
+    },
+    inputText: {
+        height: 40,
+    },
+    inputArea: {
+        height: 80
     }
 })
 
