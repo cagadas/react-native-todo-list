@@ -4,10 +4,12 @@ import { AntDesign } from '@expo/vector-icons';
 import ListContext from "../context/ListContext"
 
 const ListScreen = ({ navigation }) => {
-    const { data, getItemList, deleteItem } = useContext(ListContext)
+    
+    const { data, getItemList, deleteItem, changeItemPosition } = useContext(ListContext)
     useEffect(() => {
         getItemList();
     }, [])
+
     return (
         <View style={{ flex: 1 }}>
             <FlatList data={data} keyExtras={(data) => data.id} renderItem={({ item, index }) => {
@@ -23,10 +25,10 @@ const ListScreen = ({ navigation }) => {
                                 <Text style={{ marginLeft: 10 }}> {item.name}</Text>
                             </View>
                             <View style={styles.row}>
-                                <TouchableOpacity style={[styles.arrowButtons, styles.upButton]}>
+                                <TouchableOpacity style={[styles.arrowButtons, styles.upButton]} onPress={() => changeItemPosition(index, "up")}>
                                     <AntDesign name="up" size={20} color="green" />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={[styles.arrowButtons, styles.downButton]}>
+                                <TouchableOpacity style={[styles.arrowButtons, styles.downButton]} onPress={() => changeItemPosition(index, "down")}>
                                     <AntDesign name="down" size={20} color="red" />
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => deleteItem(item.id)}>

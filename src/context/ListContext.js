@@ -19,12 +19,26 @@ export const ListProvider = ({ children }) => {
         setItemList([...itemList, { ...item, id: `${parseInt(maxID) + 1}` }]);
     }
 
+    const changeItemPosition = (index, d) => {
+        const order = d === "up" && index !== 0 ? index - 1 :
+            d === "down" && itemList.length > index ? index + 1 : index
+        const item = itemList.splice(index, 1)[0];
+        itemList.splice(order, 0, item)
+        setItemList([...itemList])
+    }
+
     const deleteItem = (id) => {
         const filterList = itemList.filter(t => t.id !== id)
         setItemList([...filterList])
     }
 
-    return <ListContext.Provider value={{ data: itemList, getItemList, addItem, deleteItem }}>
+    return <ListContext.Provider value={{
+        data: itemList,
+        getItemList,
+        addItem,
+        deleteItem,
+        changeItemPosition
+    }}>
         {children}
     </ListContext.Provider>
 }
