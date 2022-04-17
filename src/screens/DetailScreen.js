@@ -8,6 +8,7 @@ const DetailScreen = ({ navigation }) => {
     return (
         <View style={styles.main}>
             <Image
+                testID={"avatar"}
                 style={styles.image}
                 source={{ uri: detail.avatar }}
             />

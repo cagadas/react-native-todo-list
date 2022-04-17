@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import ListContext from "../context/ListContext"
 
-const AddScreen = ({navigation}) => {
+const AddScreen = ({ navigation }) => {
 
     const { addItem } = useContext(ListContext)
     const [name, setName] = useState("")
@@ -18,13 +18,13 @@ const AddScreen = ({navigation}) => {
     return (
         <View style={{ marginVertical: 10, paddingHorizontal: 10 }}>
             <Text>Name Surname : </Text>
-            <TextInput style={[styles.input, styles.inputText]} value={name} onChangeText={(text) => setName(text)} />
+            <TextInput testID={"name"} style={[styles.input, styles.inputText]} value={name} onChangeText={(text) => setName(text)} />
             <Text>Job Title : </Text>
-            <TextInput style={[styles.input, styles.inputText]} value={job} onChangeText={(text) => setJob(text)} />
+            <TextInput testID={"job"} style={[styles.input, styles.inputText]} value={job} onChangeText={(text) => setJob(text)} />
             <Text>About Him/Her : </Text>
-            <TextInput style={[styles.input, styles.inputArea]} value={description} onChangeText={(text) => setDescription(text)} />
+            <TextInput testID={"description"} style={[styles.input, styles.inputArea]} value={description} onChangeText={(text) => setDescription(text)} />
             <Text>Image Link : </Text>
-            <TextInput style={[styles.input, styles.inputText]} value={avatar} onChangeText={(text) => setAvatar(text)} />
+            <TextInput testID={"avatar"} style={[styles.input, styles.inputText]} value={avatar} onChangeText={(text) => setAvatar(text)} />
             <Button title="Add Character" onPress={() => { addItem(formObj); navigation.navigate('List') }} />
         </View>
     )
